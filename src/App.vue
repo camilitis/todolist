@@ -15,7 +15,7 @@
           <li 
           @click="task.completed =! task.completed"
           :style="[task.completed ? {'text-decoration': 'line-through'} : {'text-decoration': 'none'}]">
-            {{task.name}}
+            {{task.id}}, {{task.name}}
           </li>
           <button @click="removeTask(index)">D</button>
         </ul>
@@ -32,8 +32,8 @@ export default({
     return{
 
     tasks: [
-      {name: 'Exercise', completed: false},
-      {name: 'Learn Vue.js', completed: true}
+      {id: 1643822542708, name: 'Exercise', completed: false},
+      {id: 1643822582580, name: 'Learn Vue.js', completed: true}
     ],
     newtask: '',
     picked: null,
@@ -44,13 +44,15 @@ export default({
     pushTask(){
       if(this.newtask !== '') {
       this.tasks.push({
-        name: this.newtask, completed: false
+        id: String(Date.now()), name: this.newtask, completed: false
       })
+      localStorage.setItem("id", this.id)
       this.newtask = ''
       }
     },
     removeTask: function(index) {
-      this.tasks.splice(index, 1);
+      this.tasks.splice(index, 1)
+      localStorage.removeItem("id", this.id)
     },
     changeTheme1(){
       document.documentElement.setAttribute("data-theme", "first")
@@ -73,9 +75,11 @@ export default({
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+@import "global.scss";
 
 html{
   background-color: var(--background);
+  transition: all .3s ease;
 }
 #app {
   font-family: 'inter', sans-serif;
