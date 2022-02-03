@@ -6,23 +6,27 @@
 <button @click="changeTheme3()">Theme 3</button>
 
   <header>
-      <section>
-        <h2>Write your next task:</h2>
-        <input type="text" v-model="newtask" @keyup.enter="pushTask()">
-        <button @click="pushTask()">Send</button>
-        <ul v-for="(task, index) of tasks" 
-          :key="task.value">
-          <li 
-          @click="task.completed =! task.completed"
-          :style="[task.completed ? {'text-decoration': 'line-through'} : {'text-decoration': 'none'}]">
-            {{task.id}}, {{task.name}}
-          </li>
-          <button @click="removeTask(index)">D</button>
-        </ul>
-      </section>
+    <div id="title"><h1>To do list</h1></div>
+    <section class="window write">
+      <h2>Write your next task:</h2>
+      <input type="text" v-model="newtask" @keyup.enter="pushTask()">
+      <button class="button" @click="pushTask()">Send</button>
+      <button class="button" @click="clearInput()">Clear</button>
+    </section>
   </header>
 
+    <ul id="taskboard" v-for="(task, index) of tasks" :key="task.value">
+      <span @click="task.completed =! task.completed" class="task window-less w-animation">
+        <li :style="[task.completed ? {'text-decoration': 'line-through', 'text-decoration-thickness': '2px'} : {'text-decoration': 'none'}]">
+          {{task.name}} 
+        </li>
+        <button class="button" @click="removeTask(index)">D</button>
+      </span>
+    </ul>
 </div>
+
+<p id="snackbar">Please write your new task</p>
+
 </template>
 
 <script>
@@ -42,13 +46,21 @@ export default({
 
   methods: {
     pushTask(){
-      if(this.newtask !== '') {
-      this.tasks.push({
-        id: String(Date.now()), name: this.newtask, completed: false
-      })
-      localStorage.setItem("id", this.id)
+      if(this.newtask == ''){
+          var x = document.getElementById("snackbar")
+          x.className = "show"
+          setTimeout(function(){
+              x.className = x.className.replace("show", "")}, 3000)
+        }else{
+          this.tasks.push({
+            id: String(Date.now()), name: this.newtask, completed: false
+          })
+        localStorage.setItem("id", this.id)
+        this.newtask = ''
+        }
+      },
+    clearInput(){
       this.newtask = ''
-      }
     },
     removeTask: function(index) {
       this.tasks.splice(index, 1)
@@ -80,16 +92,26 @@ export default({
 html{
   background-color: var(--background);
   transition: all .3s ease;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none;
 }
 #app {
   font-family: 'inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: var(--color-primary);
 }
 
 //color scheme
+:root {
+    --color-primary: #FFD500;
+    --color-accent: #2CD997;
+    --background: #AF7DFF;
+}
 [data-theme="first"]{
     --color-primary: #FFD500;
     --color-accent: #2CD997;

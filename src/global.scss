@@ -1,0 +1,107 @@
+.window{
+    box-shadow: -8px 8px 0px rgba(0, 0, 0, 0.9);
+    border: 4px solid black;
+}
+.window-less{
+    box-shadow: -4px 4px 0px rgba(0, 0, 0, 0.9);
+    border: 2px solid black;
+}
+.w-animation{
+    transition: all .3s ease;
+    &:hover{
+        box-shadow: -2px 2px 0px rgba(0, 0, 0, 0.9);
+    }
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    input{
+        border-bottom: 3px dotted black;
+        border-top: 3px dotted transparent;
+        border-left: 3px dotted transparent;
+        border-right: 3px dotted transparent;
+        background-color: transparent;
+        &:focus{
+            border: 3px dotted var(--background);
+            outline: none;
+        }
+    }
+}
+
+#title{
+    box-shadow: -8px 8px 0px rgba(0, 0, 0, 0.9);
+    border: 4px solid black;
+    border-bottom: 0px;
+    background-color: var(--color-primary);
+    width: 80vw;
+}
+
+.task{
+    border: 2px solid black;
+    padding: .7rem;
+    background-color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+li{
+    list-style: none;
+}
+
+.button{
+    cursor: pointer;
+    border: 2.5px solid black;
+    width: 4rem;
+    text-align: center;
+    box-shadow: -4px 4px 0px rgba(0, 0, 0, 0.9);
+    transition: all .3s ease;
+    &:hover{
+        border: 2.5px solid var(--background);
+        outline: none;
+        box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.9);
+    }
+}
+
+#taskboard{
+    cursor:crosshair;
+}
+
+.write{
+    background-color: whitesmoke;
+    width: 90vw;
+    padding-bottom: 1rem;
+}
+
+
+//Snackbar
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    text-align: center;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    background-color: whitesmoke;
+    box-shadow: -6px 6px 0px rgba(0, 0, 0, 0.9);
+    border: 3px solid black;
+}
+#snackbar.show{
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+@-webkit-keyframes fadein {
+    from {bottom: -60px} to {bottom: 30px; opacity: 1}
+} @keyframes fadein { 
+    from {bottom: -60px} to {bottom: 30px; opacity: 1}
+} @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1} to {bottom: -60px}
+} @keyframes fadeout {
+    from {bottom: 30px; opacity: 1} to {bottom: -60px}
+}
