@@ -3,9 +3,12 @@
 
   <section id="bar">
     <div class="colorscheme-bar">
-      <div id="colorscheme1" class="colorscheme bar-element" @click="changeTheme1()" ontouchstart=""></div>
-      <div id="colorscheme2" class="colorscheme bar-element" @click="changeTheme2()" ontouchstart=""></div>
-      <div id="colorscheme3" class="colorscheme bar-element" @click="changeTheme3()" ontouchstart=""></div>
+        <input type="radio" id="radio-one" name="switch-one" value="colorscheme1" ref="theme1" @change="changeTheme()" checked/>
+        <label class="boton" for="radio-one"><div id="colorscheme1" class="colorscheme bar-element"></div></label>
+        <input type="radio" id="radio-two" name="switch-one" value="colorscheme2" ref="theme2" @change="changeTheme()"/>
+        <label class="boton" for="radio-two"><div id="colorscheme2" class="colorscheme bar-element"></div></label>
+        <input type="radio" id="radio-three" name="switch-one" value="colorscheme3" ref="theme3" @change="changeTheme()"/>
+        <label class="boton" for="radio-three"><div id="colorscheme3" class="colorscheme bar-element"></div></label>
     </div>
     <div id="instructions">
       <p class="bar-element">Instructions</p>
@@ -77,15 +80,18 @@ export default({
     saveCompleted(){
       localStorage.setItem("localTasks", JSON.stringify(this.tasks))
     },
-    changeTheme1(){
-      document.documentElement.setAttribute("data-theme", "first")
-      localStorage.setItem("data-theme", "first")},
-    changeTheme2(){
-      document.documentElement.setAttribute("data-theme", "second")
-      localStorage.setItem("data-theme", "second")},
-    changeTheme3(){
-      document.documentElement.setAttribute("data-theme", "third")
-      localStorage.setItem("data-theme", "third")
+
+    changeTheme(){
+      if(this.$refs.theme1.checked == true) {
+        document.documentElement.setAttribute("data-theme", "first")
+        localStorage.setItem("data-theme", "first")
+      }else if(this.$refs.theme2.checked == true){
+        document.documentElement.setAttribute("data-theme", "second")
+        localStorage.setItem("data-theme", "second")
+      }else{
+        document.documentElement.setAttribute("data-theme", "third")
+        localStorage.setItem("data-theme", "third")
+        }
     }
   },
 
@@ -98,7 +104,7 @@ export default({
   mounted(){
     let localTheme = localStorage.getItem("data-theme")
     document.documentElement.setAttribute("data-theme", localTheme)
-  }
+  },
 })
 </script>
 
