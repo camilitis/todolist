@@ -1,26 +1,35 @@
 <template>
 <div>
 
-<button @click="changeTheme1()">Theme 1</button>
-<button @click="changeTheme2()">Theme 2</button>
-<button @click="changeTheme3()">Theme 3</button>
+  <section id="bar">
+    <div class="colorscheme-bar">
+      <div id="colorscheme1" class="colorscheme bar-element" @click="changeTheme1()" ontouchstart=""></div>
+      <div id="colorscheme2" class="colorscheme bar-element" @click="changeTheme2()" ontouchstart=""></div>
+      <div id="colorscheme3" class="colorscheme bar-element" @click="changeTheme3()" ontouchstart=""></div>
+    </div>
+    <div id="instructions">
+      <p class="bar-element">Instructions</p>
+    </div>
+  </section>
 
   <header>
     <div id="title"><h1>To do list</h1></div>
     <section class="window write">
       <h2>Write your next task:</h2>
-      <input type="text" v-model="newtask" @keyup.enter="pushTask()">
-      <button class="button" @click="pushTask()">Send</button>
-      <button class="button" @click="clearInput()">Clear</button>
+        <div class="inputbutton">
+          <input type="text" v-model="newtask" @keyup.enter="pushTask()">
+          <button class="button" @click="pushTask()" role="button"  ontouchstart="">Send</button>
+          <button class="button" @click="clearInput()" role="button"  ontouchstart="">Clear</button>
+        </div>
     </section>
   </header>
 
     <ul id="taskboard" v-for="(task, index) of tasks" :key="task.value">
-      <span @click="task.completed =! task.completed" class="task window-less w-animation">
+      <span @click="task.completed =! task.completed; saveCompleted()" class="task window-less w-animation">
         <li :style="[task.completed ? {'text-decoration': 'line-through', 'text-decoration-thickness': '2px'} : {'text-decoration': 'none'}]">
           {{task.name}} 
         </li>
-        <button class="button" @click="removeTask(index)">D</button>
+        <button class="button" @click="removeTask(index)">Delete</button>
       </span>
     </ul>
 </div>
@@ -34,7 +43,6 @@ export default({
   el: '#app',
   data(){
     return{
-
     tasks: [
       {id: 1643822542708, name: 'Exercise', completed: false},
       {id: 1643822582580, name: 'Learn Vue.js', completed: true}
@@ -55,7 +63,7 @@ export default({
           this.tasks.push({
             id: String(Date.now()), name: this.newtask, completed: false
           })
-        localStorage.setItem("id", this.id)
+        localStorage.setItem("localTasks", JSON.stringify(this.tasks))
         this.newtask = ''
         }
       },
@@ -64,7 +72,10 @@ export default({
     },
     removeTask: function(index) {
       this.tasks.splice(index, 1)
-      localStorage.removeItem("id", this.id)
+      localStorage.removeItem("localTasks", this.tasks)
+    },
+    saveCompleted(){
+      localStorage.setItem("localTasks", JSON.stringify(this.tasks))
     },
     changeTheme1(){
       document.documentElement.setAttribute("data-theme", "first")
@@ -78,6 +89,12 @@ export default({
     }
   },
 
+  created(){
+    let data = JSON.parse(localStorage.getItem("localTasks"))
+    if(data != null){
+      this.tasks = data
+    }
+  },
   mounted(){
     let localTheme = localStorage.getItem("data-theme")
     document.documentElement.setAttribute("data-theme", localTheme)
@@ -89,9 +106,13 @@ export default({
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
 @import "global.scss";
 
+input, textarea, button, select, a, text {
+  -webkit-tap-highlight-color: var(--background);
+  color: black;
+}
+
 html{
   background-color: var(--background);
-  transition: all .3s ease;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -104,6 +125,7 @@ html{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  padding: .5rem;
 }
 
 //color scheme

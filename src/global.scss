@@ -38,6 +38,24 @@ header{
     width: 80vw;
 }
 
+.write{
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+    width: 90vw;
+    padding-bottom: 1rem;
+}
+.inputbutton{
+    padding: 0;
+    input{
+        margin: .5rem;
+        font-size: 1rem;
+    }
+    button{
+        margin: .2rem;
+    }
+}
+
 .task{
     border: 2px solid black;
     padding: .7rem;
@@ -59,21 +77,16 @@ li{
     text-align: center;
     box-shadow: -4px 4px 0px rgba(0, 0, 0, 0.9);
     transition: all .3s ease;
-    &:hover{
-        border: 2.5px solid var(--background);
-        outline: none;
-        box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.9);
-    }
+    // &:hover{
+    //     border: 2.5px solid var(--background);
+    //     outline: none;
+    //     box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.9);
+    // } ----WEBSITE----
 }
 
 #taskboard{
     cursor:crosshair;
-}
-
-.write{
-    background-color: whitesmoke;
-    width: 90vw;
-    padding-bottom: 1rem;
+    padding: 0;
 }
 
 
@@ -105,3 +118,47 @@ li{
 } @keyframes fadeout {
     from {bottom: 30px; opacity: 1} to {bottom: -60px}
 }
+
+//color scheme menu
+#bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.bar-element{
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 2px;
+    margin: 5px;
+    box-shadow: -2px 2px 0px rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}
+#instructions{
+    background-color: whitesmoke;
+    p{
+        box-sizing: content-box;
+        width: 100%;
+        padding: .2rem;
+        margin: 0;
+        transition: all .2s ease;
+        &:hover{
+            box-shadow: -1px 1px 0px rgba(0, 0, 0, 0.9);
+        }
+    }
+}
+.colorscheme-bar{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.colorscheme{
+    width: 20px;
+    border-radius: 10%;
+    transition: all .3s ease;
+    &:hover{
+        box-shadow: -1px 1px 0px rgba(0, 0, 0, 0.9);
+    }
+}
+#colorscheme1{background-color: #FFD500;}
+#colorscheme2{background-color: #ffe5d4;}
+#colorscheme3{background-color: #abd1c6;}
