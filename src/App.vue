@@ -3,15 +3,15 @@
 
   <section id="bar">
     <div class="colorscheme-bar">
-        <input type="radio" id="radio-one" name="switch-one" value="colorscheme1" ref="theme1" @change="changeTheme()" checked/>
-        <label class="boton" for="radio-one"><div id="colorscheme1" class="colorscheme bar-element"></div></label>
+        <input type="radio" id="radio-one" name="switch-one" value="colorscheme1" ref="theme1" @change="changeTheme()"/>
+        <label id="colorscheme1" class="colorscheme bar-element window-less-animation" for="radio-one"></label>
         <input type="radio" id="radio-two" name="switch-one" value="colorscheme2" ref="theme2" @change="changeTheme()"/>
-        <label class="boton" for="radio-two"><div id="colorscheme2" class="colorscheme bar-element"></div></label>
+        <label id="colorscheme2" class="colorscheme bar-element window-less-animation" for="radio-two"></label>
         <input type="radio" id="radio-three" name="switch-one" value="colorscheme3" ref="theme3" @change="changeTheme()"/>
-        <label class="boton" for="radio-three"><div id="colorscheme3" class="colorscheme bar-element"></div></label>
+        <label id="colorscheme3" class="colorscheme bar-element window-less-animation" for="radio-three" ></label>
     </div>
-    <div id="instructions">
-      <p class="bar-element">Instructions</p>
+    <div>
+      <p id="instructions-link" class="bar-element window-less-animation" @click="$refs.modalName.openModal()">Instructions</p>
     </div>
   </section>
 
@@ -39,11 +39,29 @@
 
 <p id="snackbar">Please write your new task</p>
 
+<modal ref="modalName">
+    <template v-slot:header>
+      <h3>Instructions</h3>
+    </template>
+
+    <template v-slot:body>
+      <p>Write your task and press enter (or send). When task is finished you can click on it to mark it as "done".</p>
+
+      <footer>Made by <a href="camilaguerra.vercel.app">Camila</a> with Vue.js</footer>
+    </template>
+
+</modal>
+
 </template>
 
 <script>
+import Modal from "@/components/Modal"
+
 export default({
   el: '#app',
+  components: {
+    Modal 
+  },
   data(){
     return{
     tasks: [
@@ -80,7 +98,6 @@ export default({
     saveCompleted(){
       localStorage.setItem("localTasks", JSON.stringify(this.tasks))
     },
-
     changeTheme(){
       if(this.$refs.theme1.checked == true) {
         document.documentElement.setAttribute("data-theme", "first")
@@ -91,7 +108,7 @@ export default({
       }else{
         document.documentElement.setAttribute("data-theme", "third")
         localStorage.setItem("data-theme", "third")
-        }
+      }
     }
   },
 
@@ -100,11 +117,10 @@ export default({
     if(data != null){
       this.tasks = data
     }
-  },
-  mounted(){
+
     let localTheme = localStorage.getItem("data-theme")
     document.documentElement.setAttribute("data-theme", localTheme)
-  },
+  }
 })
 </script>
 
@@ -119,26 +135,28 @@ input, textarea, button, select, a, text {
 
 html{
   background-color: var(--background);
+  padding: .3rem;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
      -moz-user-select: none; /* Firefox */
       -ms-user-select: none; /* Internet Explorer/Edge */
           user-select: none;
+    transition: all .3s ease;
 }
 #app {
   font-family: 'inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  padding: .5rem;
+  transition: all .3s ease;
 }
 
 //color scheme
 :root {
-    --color-primary: #FFD500;
-    --color-accent: #2CD997;
-    --background: #AF7DFF;
+  --color-primary: #FFD500;
+  --color-accent: #2CD997;
+  --background: #AF7DFF;
 }
 [data-theme="first"]{
     --color-primary: #FFD500;

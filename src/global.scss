@@ -12,6 +12,12 @@
         box-shadow: -2px 2px 0px rgba(0, 0, 0, 0.9);
     }
 }
+.window-less-animation{
+    transition: all .3s ease;
+    &:hover{
+        box-shadow: -1px 1px 0px rgba(0, 0, 0, 0.9);
+    }
+}
 
 header{
     display: flex;
@@ -77,11 +83,6 @@ li{
     text-align: center;
     box-shadow: -4px 4px 0px rgba(0, 0, 0, 0.9);
     transition: all .3s ease;
-    // &:hover{
-    //     border: 2.5px solid var(--background);
-    //     outline: none;
-    //     box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.9);
-    // } ----WEBSITE----
 }
 
 #taskboard{
@@ -89,10 +90,60 @@ li{
     padding: 0;
 }
 
+//modal text- instructions
+footer{
+    a{
+        text-decoration: none;
+        border-bottom: 2px dotted var(--color-accent);
+    }
+}
+
+//color schemes
+#bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: .3rem;
+    padding: 0;
+}
+.bar-element{
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 2px;
+    margin: 5px;
+    box-shadow: -2px 2px 0px rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}
+#instructions-link{
+    background-color: whitesmoke;
+    box-sizing: content-box;
+    width: 100%;
+    padding: .2rem;
+    margin: 0;
+}
+.colorscheme-bar{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.colorscheme-bar input{
+    display: none;
+}
+.colorscheme-bar input:checked + label {
+    box-shadow: -1px 1px 0px black;
+  }
+.colorscheme{
+    width: 20px;
+    border-radius: 10%;
+}
+#colorscheme1{background-color: #FFD500;}
+#colorscheme2{background-color: #ffe5d4;}
+#colorscheme3{background-color: #abd1c6;}
 
 //Snackbar
 #snackbar {
     visibility: hidden;
+    padding: .25rem;
     min-width: 250px;
     margin-left: -125px;
     text-align: center;
@@ -108,8 +159,7 @@ li{
     visibility: visible;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-@-webkit-keyframes fadein {
+} @-webkit-keyframes fadein {
     from {bottom: -60px} to {bottom: 30px; opacity: 1}
 } @keyframes fadein { 
     from {bottom: -60px} to {bottom: 30px; opacity: 1}
@@ -119,46 +169,48 @@ li{
     from {bottom: 30px; opacity: 1} to {bottom: -60px}
 }
 
-//color scheme menu
-#bar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+@media (min-width: 800px){
+.button{
+    &:hover{
+    border: 2.5px solid var(--background);
+    outline: none;
+    box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.9);
+    }
 }
-.bar-element{
-    height: 20px;
-    border: 2px solid black;
-    border-radius: 2px;
-    margin: 5px;
-    box-shadow: -2px 2px 0px rgba(0, 0, 0, 0.9);
-    cursor: pointer;
+#title{
+    width: 40vw;
 }
-#instructions{
-    background-color: whitesmoke;
-    p{
-        box-sizing: content-box;
-        width: 100%;
-        padding: .2rem;
-        margin: 0;
+
+header{
+    input{
+        width: 45vw;
+    }
+    input[type="text"]{
+        font-size: 1.3rem;
+    }
+}
+
+.write{
+    width: 70vw;
+    padding: 2rem;
+}
+.button{
+    width: 5rem;
+    padding: .5rem 0;
+    box-sizing: content-box;
+}
+button{
+    box-sizing: content-box;
+}
+#taskboard{
+    width: 80vw;
+}
+footer{
+    a{
         transition: all .2s ease;
         &:hover{
-            box-shadow: -1px 1px 0px rgba(0, 0, 0, 0.9);
+            border-bottom: 2px dotted black;
         }
     }
 }
-.colorscheme-bar{
-    display: flex;
-    margin: 0;
-    padding: 0;
 }
-.colorscheme{
-    width: 20px;
-    border-radius: 10%;
-    transition: all .3s ease;
-    &:hover{
-        box-shadow: -1px 1px 0px rgba(0, 0, 0, 0.9);
-    }
-}
-#colorscheme1{background-color: #FFD500;}
-#colorscheme2{background-color: #ffe5d4;}
-#colorscheme3{background-color: #abd1c6;}
