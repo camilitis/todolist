@@ -27,14 +27,23 @@
     </section>
   </header>
 
-    <ul id="taskboard" v-for="(task, index) of tasks" :key="task.value">
-      <span @click="task.completed =! task.completed; saveCompleted()" class="task window-less w-animation">
-        <li :style="[task.completed ? {'text-decoration': 'line-through', 'text-decoration-thickness': '2px'} : {'text-decoration': 'none'}]">
-          {{task.name}} 
-        </li>
-        <button class="button" @click="removeTask(index)">Delete</button>
+    <section id="taskboard">
+      <span 
+        v-for="(task, index) of tasks" 
+        :key="task.value"
+        class="task window-less w-animation"
+        @click="task.completed =! task.completed; saveCompleted()"
+        :style="[task.completed ? {'text-decoration': 'line-through', 'text-decoration-thickness': '2px'} : {'text-decoration': 'none'}]"
+      >
+      {{task.name}}
+        <img
+          :src="pictureHover"
+          @mouseover="hover = true"
+          @mouseleave="hover = false" 
+          @click.stop="removeTask(index)"
+        />
       </span>
-    </ul>
+    </section>
 </div>
 
 <p id="snackbar">Please write your new task</p>
@@ -70,6 +79,10 @@ export default({
     ],
     newtask: '',
     picked: null,
+
+    pictureStatic: require("@/img/trashcan-c.png"),
+    pictureGif: require("@/img/trashcan-o.png"),
+    hover: false
     }
   },
 
@@ -120,6 +133,16 @@ export default({
 
     let localTheme = localStorage.getItem("data-theme")
     document.documentElement.setAttribute("data-theme", localTheme)
+  },
+
+  computed: {
+    pictureHover(){
+      if (this.hover == true) {
+        return this.pictureGif
+      } else {
+        return this.pictureStatic
+      }
+    }
   }
 })
 </script>
