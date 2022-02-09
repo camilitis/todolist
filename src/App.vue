@@ -4,49 +4,49 @@
   <section id="bar">
     <div class="colorscheme-bar">
         <input type="radio" id="radio-one" name="switch-one" value="colorscheme1" ref="theme1" @change="changeTheme()"/>
-        <label id="colorscheme1" class="colorscheme bar-element window-less-animation" for="radio-one"></label>
+        <label id="colorscheme1" class="colorscheme colorThemeSquare button" for="radio-one"></label>
         <input type="radio" id="radio-two" name="switch-one" value="colorscheme2" ref="theme2" @change="changeTheme()"/>
-        <label id="colorscheme2" class="colorscheme bar-element window-less-animation" for="radio-two"></label>
+        <label id="colorscheme2" class="colorscheme colorThemeSquare button" for="radio-two"></label>
         <input type="radio" id="radio-three" name="switch-one" value="colorscheme3" ref="theme3" @change="changeTheme()"/>
-        <label id="colorscheme3" class="colorscheme bar-element window-less-animation" for="radio-three" ></label>
+        <label id="colorscheme3" class="colorscheme colorThemeSquare button" for="radio-three" ></label>
     </div>
     <div>
-      <p id="instructions-link" class="bar-element window-less-animation" @click="$refs.modalName.openModal()">Instructions</p>
+      <p id="instructionsButton" class="button" @click="$refs.modalName.openModal()">Instructions</p>
     </div>
   </section>
-
   <header>
-    <div id="title"><h1>To do list</h1></div>
+    <div id="title" class="window"><h1>To do list</h1></div>
     <section class="window write">
       <h2>Write your next task:</h2>
-        <div class="inputbutton">
+        <div id="inputSection">
           <input type="text" v-model="newtask" @keyup.enter="pushTask()">
-          <button class="button" @click="pushTask()" role="button"  ontouchstart="">Send</button>
-          <button class="button" @click="clearInput()" role="button"  ontouchstart="">Clear</button>
+          <div>
+            <button class="button" @click="pushTask()" role="button"  ontouchstart="">Send</button>
+            <button class="button" @click="clearInput()" role="button"  ontouchstart="">Clear</button>
+          </div>
+
         </div>
     </section>
   </header>
-
     <section id="taskboard">
       <span 
         v-for="(task, index) of tasks" 
         :key="task.value"
-        class="task window-less w-animation"
-        @click="task.completed =! task.completed; saveCompleted()"
-        :style="[task.completed ? {'text-decoration': 'line-through', 'text-decoration-thickness': '2px'} : {'text-decoration': 'none'}]"
+        class="task w-animation"
       >
-      {{task.name}}
-        <img
-          :src="pictureHover"
-          @mouseover="hover = true"
-          @mouseleave="hover = false" 
-          @click.stop="removeTask(index)"
-        />
+        <div 
+          class="text"
+          @click="task.completed =! task.completed; saveCompleted()"
+          :style="[task.completed ? {'text-decoration': 'line-through', 'text-decoration-thickness': '2px'} : {'text-decoration': 'none'}]"
+        >
+          {{task.name}} 
+        </div>
+        <button @click="removeTask(index)" class="button">Delete</button>
       </span>
     </section>
 </div>
 
-<p id="snackbar">Please write your new task</p>
+<p id="snackbar" class="window4">Please write your new task</p>
 
 <modal ref="modalName">
     <template v-slot:header>
@@ -56,7 +56,7 @@
     <template v-slot:body>
       <p>Write your task and press enter (or send). When task is finished you can click on it to mark it as "done".</p>
 
-      <footer>Made by <a href="camilaguerra.vercel.app">Camila</a> with Vue.js</footer>
+      <footer>Made by <a href="camilaguerra.vercel.app" target="_blank">Camila</a> with Vue.js</footer>
     </template>
 
 </modal>
@@ -78,11 +78,7 @@ export default({
       {id: 1643822582580, name: 'Learn Vue.js', completed: true}
     ],
     newtask: '',
-    picked: null,
-
-    pictureStatic: require("@/img/trashcan-c.png"),
-    pictureGif: require("@/img/trashcan-o.png"),
-    hover: false
+    picked: null
     }
   },
 
@@ -133,16 +129,6 @@ export default({
 
     let localTheme = localStorage.getItem("data-theme")
     document.documentElement.setAttribute("data-theme", localTheme)
-  },
-
-  computed: {
-    pictureHover(){
-      if (this.hover == true) {
-        return this.pictureGif
-      } else {
-        return this.pictureStatic
-      }
-    }
   }
 })
 </script>
@@ -173,9 +159,16 @@ html{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   transition: all .3s ease;
+  a{
+    text-decoration: none;
+    border-bottom: 2px dotted var(--color-accent);
+    &:hover{
+      border-bottom: 2px dotted black;
+    }
+  }
 }
 
-//color scheme
+//Color Theme
 :root {
   --color-primary: #FFD500;
   --color-accent: #2CD997;
