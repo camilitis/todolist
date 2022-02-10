@@ -228,6 +228,8 @@ header{
     }
 }
 #inputSectionButtons{
+    justify-content: flex-start;
+    margin: 0 0;
         button{
             margin: .5rem;
             padding: .3rem;

@@ -53,7 +53,7 @@
     </template>
 
     <template v-slot:body>
-      <p>Write your task and press enter (or send). When task is finished you can click on it to mark it as "done".</p>
+      <p>Write your task and press enter (or send). When task is finished you can click on it to mark it as "done" and then delete it</p>
 
       <footer>Made by <a href="camilaguerra.vercel.app" target="_blank">Camila</a> with Vue.js</footer>
     </template>
