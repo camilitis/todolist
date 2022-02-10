@@ -10,34 +10,33 @@
         <input type="radio" id="radio-three" name="switch-one" value="colorscheme3" ref="theme3" @change="changeTheme()"/>
         <label id="colorscheme3" class="colorscheme colorThemeSquare button" for="radio-three" ></label>
     </div>
-    <div>
-      <p id="instructionsButton" class="button" @click="$refs.modalName.openModal()">Instructions</p>
-    </div>
+      <p class="button" @click="$refs.modalName.openModal()">Instructions</p>
   </section>
   <header>
-    <div id="title" class="window"><h1>To do list</h1></div>
-    <section class="window write">
-      <h2>Write your next task:</h2>
-        <div id="inputSection">
-          <input type="text" v-model="newtask" @keyup.enter="pushTask()">
-          <div>
-            <button class="button" @click="pushTask()" role="button"  ontouchstart="">Send</button>
-            <button class="button" @click="clearInput()" role="button"  ontouchstart="">Clear</button>
+    <div id="title" class="window">
+      <h1>To do list</h1>
+    </div>
+      <section class="window write">
+        <h2>Write your next task:</h2>
+          <div id="inputSection">
+            <input type="text" v-model="newtask" @keyup.enter="pushTask()">
+            <div id="inputSectionButtons">
+              <button class="button taskButton" @click="clearInput()" role="button"  ontouchstart="">Clear</button>
+              <button class="button taskButton" @click="pushTask()" role="button"  ontouchstart="">Send</button>
+            </div>
           </div>
-
-        </div>
-    </section>
+      </section>
   </header>
     <section id="taskboard">
       <span 
         v-for="(task, index) of tasks" 
         :key="task.value"
-        class="task w-animation"
+        class="task"
       >
         <div 
           class="text"
           @click="task.completed =! task.completed; saveCompleted()"
-          :style="[task.completed ? {'text-decoration': 'line-through', 'text-decoration-thickness': '2px'} : {'text-decoration': 'none'}]"
+          :style="[task.completed ? {'text-decoration': 'line-through', 'text-decoration-thickness': '2.5px'} : {'text-decoration': 'none'}]"
         >
           {{task.name}} 
         </div>
@@ -118,6 +117,10 @@ export default({
         document.documentElement.setAttribute("data-theme", "third")
         localStorage.setItem("data-theme", "third")
       }
+    },
+
+    zoom() {
+      document.body.style.zoom = "90%" 
     }
   },
 
@@ -151,7 +154,6 @@ html{
      -moz-user-select: none; /* Firefox */
       -ms-user-select: none; /* Internet Explorer/Edge */
           user-select: none;
-    transition: all .3s ease;
 }
 #app {
   font-family: 'inter', sans-serif;
@@ -162,6 +164,7 @@ html{
   a{
     text-decoration: none;
     border-bottom: 2px dotted var(--color-accent);
+    transition: all .3s ease;
     &:hover{
       border-bottom: 2px dotted black;
     }

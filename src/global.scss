@@ -32,23 +32,26 @@ header{
     }
 }
 .write{
+    width: 90vw;
     display: flex;
     flex-direction: column;
-    width: 90vw;
+    align-self: center;
     h2{
         padding-left: 1rem;
     }
 }
 #inputSection{
-    box-sizing: content-box;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    padding: 1rem 0rem;
+    width: 100%;
+    display: grid; 
+    grid-template-columns: .3fr 1fr .45fr; 
+    grid-template-areas: 
+      "blank input buttonsInput";
     button{
         margin: .2rem;
     }
     input{
+        grid-area: input;
         border-bottom: 3px dotted black;
         border-top: 3px dotted transparent;
         border-left: 3px dotted transparent;
@@ -60,23 +63,40 @@ header{
         }
     }
 }
+#inputSectionButtons{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    grid-area: buttonsInput;
+}
 #taskboard{
     margin: 1rem;
     box-sizing: content-box;
     width: 90vw;
 }
 .task{
+    display: grid; 
+    grid-template-columns: 2.2fr 0.3fr; 
+    grid-template-rows: 1fr;
+    grid-gap: 13px;
+    grid-template-areas: 
+      "task buttonTask"; 
     border: 2.5px solid black;
     background-color: var(--color-accent);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
     width: 75vw;
-    height: 5vh;
+    min-height: 5vh;
     margin: .5rem;
     padding: .5rem;
     border-radius: 2px;
+    div{
+        grid-area: task;
+    }
+    button{
+        grid-area: buttonTask;
+        max-height: 2rem;
+        align-self: center;
+    }
 }
 .text{
     width: 100%;
@@ -92,6 +112,7 @@ header{
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin: 0 auto;
 }
 .colorThemeSquare{
     height: 1.1rem;
@@ -151,40 +172,75 @@ header{
     transition: all .2s ease;
     cursor: pointer;
     font-weight: bold;
-    border: 2.45px solid black;
+    border: 2px solid black;
     font-size: 1rem;
     text-align: center;
-    box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.9);
+    box-shadow: -2.5px 2.5px 0px rgba(0, 0, 0, 0.9);
     margin: 1em;
     box-sizing: content-box;
     &:hover{
         box-shadow: -1px 1px 0px rgba(0, 0, 0, 0.9);
     }
     &:active{
-        box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.9);
+        box-shadow: -2.5px 2.5px 0px rgba(0, 0, 0, 0.9);
     }
+}
+#bar{
+    width: 97%;
+    p{
+        font-weight: 400;
+        font-size: 0.9rem;
+        height: 1.1rem;
+    }
+}
+.colorThemeSquare{
+    margin: 5px;
 }
 .write{
     align-items: center;
-
+    padding: 1rem 0;
 }
 header{
     input{
         width: 45vw;
     }
-    input[type="text"]{
-        font-size: 1.3rem;
+}
+#title{
+    text-align: center;
+    h1{
+        padding: 0rem;
     }
 }
-
-.task{
-    width: 35vw;
-    min-height: 3.3em;
-    font-size: 1.2rem;
-    margin: .5rem;
-    border: 2.5px solid black;
-    cursor: crosshair;
-    transition: all .2s ease;
+#inputSection{
+    grid-template-columns: .45fr 1fr .35fr; 
+    input{
+        grid-area: input;
+        align-items: center;
+        align-self: center;
+        border-bottom: 3.5px dotted black;
+        border-top: 3.5px dotted transparent;
+        border-left: 3.5px dotted transparent;
+        border-right: 3.5px dotted transparent;
+        font-size: 1.2rem;
+        &:focus{
+            border: 3.5px dotted var(--background);
+        }
+    }
+}
+#inputSectionButtons{
+        button{
+            margin: .5rem;
+            padding: .3rem;
+            &:hover{
+                border: 2px solid var(--color-accent);
+                box-shadow: -1px 1px 0px var(--color-accent);
+            }
+    }
+}
+.taskButton{
+    padding:.3rem;
+    width: auto;
+    width: 4rem;
 }
 #taskboard{
     display: flex;
@@ -193,5 +249,15 @@ header{
     margin: 1rem 0;
     width: 100%;
 }
-
+.task{
+    width: 35vw;
+    min-height: 3.3em;
+    margin: .5rem;
+    border: 2.5px solid black;
+    cursor: crosshair;
+    transition: all .2s ease;
+}
+#snackbar{
+    padding: 1.5rem;
+}
 }
