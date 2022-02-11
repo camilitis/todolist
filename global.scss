@@ -1,0 +1,264 @@
+.button{
+    box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.9);
+    border: 2px solid black;
+    background-color: white;
+    padding: .1rem;
+    border-radius: 2px;
+}
+.button:active {
+    box-shadow: -1px 1px 0px rgba(0, 0, 0, 0.9);
+}
+
+.window{
+    box-shadow: -6px 6px 0px rgba(0, 0, 0, 0.9);
+    border: 4px solid black;
+    background-color: white;
+    border-radius: 2px;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: start;
+}
+
+#title{
+    border-bottom: 0px;
+    background-color: var(--color-primary);
+    width: 80vw;
+    h1{
+        padding-left: 1rem;
+    }
+}
+.write{
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    h2{
+        padding-left: 1rem;
+    }
+}
+#inputSection{
+    padding: 1rem 0rem;
+    width: 100%;
+    display: grid; 
+    grid-template-columns: .3fr 1fr .45fr; 
+    grid-template-areas: 
+      "blank input buttonsInput";
+    button{
+        margin: .2rem;
+    }
+    input{
+        grid-area: input;
+        border-bottom: 3px dotted black;
+        border-top: 3px dotted transparent;
+        border-left: 3px dotted transparent;
+        border-right: 3px dotted transparent;
+        background-color: transparent;
+        &:focus{
+            border: 3px dotted var(--background);
+            outline: none;
+        }
+    }
+}
+#inputSectionButtons{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    grid-area: buttonsInput;
+}
+#taskboard{
+    margin: 1rem;
+    box-sizing: content-box;
+    width: 90vw;
+}
+.task{
+    display: grid; 
+    grid-template-columns: 2.2fr 0.3fr; 
+    grid-template-rows: 1fr;
+    grid-gap: 13px;
+    grid-template-areas: 
+      "task buttonTask"; 
+    border: 2.5px solid black;
+    background-color: var(--color-accent);
+    width: 75vw;
+    min-height: 5vh;
+    margin: .5rem;
+    padding: .5rem;
+    border-radius: 2px;
+    div{
+        grid-area: task;
+    }
+    button{
+        grid-area: buttonTask;
+        max-height: 2rem;
+        align-self: center;
+    }
+}
+.text{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+//Color Themes
+#bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+}
+.colorThemeSquare{
+    height: 20px;
+    margin: 5px;
+}
+.colorscheme-bar{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.colorscheme-bar input{
+    display: none;
+}
+.colorscheme-bar input:checked + label {
+    box-shadow: -1px 1px 0px black;
+  }
+.colorscheme{
+    width: 20px;
+}
+#colorscheme1{background-color: #FFD500;}
+#colorscheme2{background-color: #ffe5d4;}
+#colorscheme3{background-color: #abd1c6;}
+
+//Snackbar
+#snackbar {
+    visibility: hidden;
+    padding: .25rem;
+    min-width: 250px;
+    margin-left: -125px;
+    text-align: center;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    box-shadow: -4px 4px 0px rgba(0, 0, 0, 0.9);
+    border: 3px solid black;
+    background-color: white;
+}
+#snackbar.show{
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 1.5s;
+    animation: fadein 0.5s, fadeout 0.5s 1.5s;
+} @-webkit-keyframes fadein {
+    from {bottom: -60px} to {bottom: 30px; opacity: 1}
+} @keyframes fadein { 
+    from {bottom: -60px} to {bottom: 30px; opacity: 1}
+} @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1} to {bottom: -60px}
+} @keyframes fadeout {
+    from {bottom: 30px; opacity: 1} to {bottom: -60px}
+}
+
+//DESKTOP VERSION//
+@media (min-width: 800px){
+
+.button{
+    transition: all .2s ease;
+    cursor: pointer;
+    font-weight: bold;
+    border: 2px solid black;
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: -2.5px 2.5px 0px rgba(0, 0, 0, 0.9);
+    margin: 1em;
+    box-sizing: content-box;
+    &:hover{
+        box-shadow: -1px 1px 0px rgba(0, 0, 0, 0.9);
+    }
+    &:active{
+        box-shadow: -2.5px 2.5px 0px rgba(0, 0, 0, 0.9);
+    }
+}
+#bar{
+    width: 97%;
+    p{
+        font-weight: 400;
+        font-size: 0.9rem;
+        height: 1.1rem;
+    }
+}
+.colorThemeSquare{
+    margin: 5px;
+}
+.write{
+    width: 50vw;
+    padding: 0 0;
+}
+header{
+    input{
+        width: 25vw;
+    }
+}
+#title{
+    width: 30vw;
+    text-align: center;
+    h1{
+        padding: 0rem;
+    }
+}
+#inputSection{
+    input{
+        align-self: center;
+        border-bottom: 3.5px dotted black;
+        border-top: 3.5px dotted transparent;
+        border-left: 3.5px dotted transparent;
+        border-right: 3.5px dotted transparent;
+        font-size: 1.2rem;
+        &:focus{
+            border: 3.5px dotted var(--background);
+        }
+    }
+}
+#inputSectionButtons{
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 0;
+        button{
+            margin: .5rem;
+            padding: .3rem;
+            &:hover{
+                border: 2px solid var(--color-accent);
+                box-shadow: -1px 1px 0px var(--color-accent);
+            }
+    }
+}
+.taskButton{
+    padding:.3rem;
+    width: auto;
+    width: 4rem;
+}
+#taskboard{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem 0;
+    width: 100%;
+}
+.task{
+    width: 35vw;
+    min-height: 3.3em;
+    margin: .5rem;
+    border: 2.5px solid black;
+    cursor: crosshair;
+    transition: all .2s ease;
+}
+#snackbar{
+    padding: 1.5rem;
+}
+}
